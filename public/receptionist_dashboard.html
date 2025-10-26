@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Dashboard - Hotel Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, <span id="username"></span>!</h2>
+        <p>Role: <span id="role"></span></p>
+        <button onclick="logout()">Logout</button>
+        <h3>Add New Customer</h3>
+        <div class="customer-form-container">
+            <form id="customer-form">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone (optional):</label>
+                    <input type="text" id="phone" name="phone">
+                </div>
+                <button type="submit">Add Customer</button>
+                <p id="customer-error" class="error"></p>
+            </form>
+        </div>
+        <h3>Create Booking</h3>
+        <form id="booking-form">
+            <div class="form-group">
+                <label for="customerId">Customer:</label>
+                <select id="customerId" name="customerId" class="select2" required></select>
+            </div>
+            <div class="form-group">
+                <label for="roomId">Room:</label>
+                <select id="roomId" name="roomId" required>
+                    <option value="">Select Room</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="checkInDate">Check-In Date:</label>
+                <input type="date" id="checkInDate" name="checkInDate" required>
+            </div>
+            <div class="form-group">
+                <label for="checkOutDate">Check-Out Date:</label>
+                <input type="date" id="checkOutDate" name="checkOutDate" required>
+            </div>
+            <button type="submit">Create Booking</button>
+            <p id="error" class="error"></p>
+        </form>
+        <h3>My Bookings</h3>
+        <table id="bookings-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Room</th>
+                    <th>Check-In</th>
+                    <th>Check-Out</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Receptionist</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
