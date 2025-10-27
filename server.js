@@ -9,18 +9,18 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: '4671f1f79d2b22f26f4abf775fb45109375c1e6031adb9882ae77d75656003d5',
+    secret: process.env.SESSION_SECRET || '4671f1f79d2b22f26f4abf775fb45109375c1e6031adb9882ae77d75656003d5',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false } 
+    cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
 
 const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'hotel_management'
-};
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASS || '',
+    database: process.env.DB_NAME || 'hotel_management'
+}; 
 
 const connectDB = async () => mysql.createConnection(dbConfig);
 
@@ -397,5 +397,5 @@ app.put('/api/bookings/:id', async (req, res) => {
     }
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

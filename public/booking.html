@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Room</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Book Your Room</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="booking.html">Booking</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <form>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <label for="room">Room Type:</label>
+            <select id="room">
+                <option>Single Room</option>
+                <option>Double Room</option>
+                <option>Deluxe Suite</option>
+            </select>
+
+            <label for="checkin">Check-in Date:</label>
+            <input type="date" id="checkin" required>
+
+            <label for="checkout">Check-out Date:</label>
+            <input type="date" id="checkout" required>
+
+            <button type="submit">Book Now</button>
+        </form>
+        <hr>
+
+        <h2>Saved Booking (Demo)</h2>
+        <div id="showData"></div>
+
+        <script>
+            function saveBooking() {
+                // Get form values
+                const booking = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    room: document.getElementById("room").value,
+                    checkin: document.getElementById("checkin").value,
+                    checkout: document.getElementById("checkout").value
+                };
+
+                // Save to localStorage
+                localStorage.setItem("bookingData", JSON.stringify(booking));
+                alert("Booking saved successfully (Demo)!");
+
+                // Show data
+                showBooking();
+            }
+
+            function showBooking() {
+                const saved = localStorage.getItem("bookingData");
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    document.getElementById("showData").innerHTML = `
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Room Type:</strong> ${data.room}</p>
+          <p><strong>Check-in:</strong> ${data.checkin}</p>
+          <p><strong>Check-out:</strong> ${data.checkout}</p>
+        `;
+                }
+            }
+
+            // Show saved booking if it exists
+            showBooking();
+        </script>
+
+    </main>
+
+    <footer>
+        <p>© 2025 Hotel Booking System</p>
+    </footer>
+</body>
+
+</html>
